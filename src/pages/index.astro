@@ -1,0 +1,14 @@
+---
+import { published } from "@data/post"
+import Blog from "@layouts/blog";
+import Preview from "@components/blog/preview";
+
+const markdownFiles = await Astro.glob('../content/**/*.md')
+const posts = published( markdownFiles );
+---
+
+<Blog>
+	<div>
+		{posts.map((p) => <Preview post={p} />)}
+	</div>
+</Blog>

@@ -1,0 +1,21 @@
+---
+import { nav } from "@data/nav"
+---
+<div class="navbar bg-base-100">
+  <div class="flex-1">
+    <a href="/" class="p-2 hover:underline text-2xl font-bold flex gap-4 items-center">
+      <img src="https://api.lorem.space/image/face?w=100&h=100" width="50" height="50" alt="Astro Blog" class="rounded-full bg-base-200">
+      Daisy blog
+    </a>
+  </div>
+  <div class="flex-none">
+    <ul class="menu menu-horizontal p-0">
+    {nav.map(item => (
+      <li class="menu-item">
+        <a href={item.slug}>{item.title}</a>
+      </li>
+    ))}
+    </ul>
+    <slot/>
+  </div>
+</div>

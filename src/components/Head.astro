@@ -1,0 +1,49 @@
+---
+const siteInfo = {
+  siteName: 'Daisy Blog',
+  siteDesc: 'This is a simple blog',
+}
+
+let {title} = Astro.props;
+let {desc} = Astro.props;
+let {img} = Astro.props;
+let {twitterUsername} = Astro.props;
+
+if(!title) {
+  title = siteInfo.siteName
+}
+if(!desc) {
+  desc = siteInfo.siteDesc
+}
+if(!img) {
+  img = Astro.site+'card.png'
+}
+---
+
+<head>
+  
+	<!-- essential -->
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width" />
+  
+  <!-- core -->
+	{title && <title>{title}</title>}
+	{desc && <meta name="description" content={desc}>}
+	<!-- twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+	{title && <meta name="twitter:title" content={title} />}
+	{desc && <meta name="twitter:description" content={desc} />}
+	<meta name="twitter:image" content={img} />
+	{title && <meta name="twitter:image:alt" content={title} />}
+	{twitterUsername && <meta name="twitter:site" content={twitterUsername}/>}
+	{twitterUsername && <meta name="twitter:creator" content={twitterUsername}/>}
+	<!-- og -->
+	{title && <meta property="og:title" content={title} />}
+	{desc && <meta property="og:description" content={desc} />}
+	<meta property="og:image" content={img} />
+	{title && <meta property="og:image:alt" content={title} />}
+	{title && <meta property="og:site_name" content={title} />}
+	<meta property="og:type" content="object" />
+	<meta property="og:url" content={Astro.site} />
+	<slot/>
+</head>

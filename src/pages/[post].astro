@@ -1,0 +1,49 @@
+---
+import Blog from "@layouts/blog";
+import Date from "@components/utilities/Date";
+import { published, getRSS } from "@data/post"
+
+export async function getStaticPaths({ rss }) {
+	const markdownFiles = await Astro.glob('../content/**/*.md');
+	const posts = published( markdownFiles );
+	
+	rss(getRSS(markdownFiles));
+
+	return posts.map((post) => {
+		return {
+			params: { post: post.slug },
+			props: { post }
+		};
+	})
+}
+
+// Destructure to get both `Astro.props.post` and `Astro.props.post.Content`
+const { post: { Content }, post } = Astro.props;
+---
+<Blog title={post.title} desc={post.desc} img={post.img ? post.img : null}>
+	<div class="flex justify-center">
+		<div class="py-6 prose lg:prose-lg">
+			{post.img && post.imgWidth && post.imgHeight ?
+				<figure class="flex justify-center">
+					<img src={post.img} alt={post.title} width={post.imgWidth} height={post.imgHeight} class="rounded bg-base-200" />
+				</figure>
+				: post.img &&
+				<figure class="flex justify-center">
+					<img src={post.img} alt={post.title} class="rounded bg-base-200" />
+				</figure>
+			}
+			<h1>{post.title}</h1>
+			<div class="flex gap-3">
+				<span class="badge badge-ghost">
+					<Date date={post.date}/>
+				</span>
+				{post.author &&
+					<span class="text-sm text-base-content/70">By {post.author}</span>
+				}
+			</div>
+			<div>
+				<Content />
+			</div>
+		</div>
+	</div>
+</Blog>

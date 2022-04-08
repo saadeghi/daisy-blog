@@ -1,0 +1,7 @@
+---
+const {date} = Astro.props;
+
+const options = { year: 'numeric', month: 'long', day: 'numeric' };
+const formattedDate = new Intl.DateTimeFormat('en-US', options).format(Date.parse(date))
+---
+<time datetime={date}>{formattedDate}</time>

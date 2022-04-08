@@ -1,0 +1,20 @@
+{
+	"compilerOptions": {
+		"moduleResolution": "node",
+		"module": "ES2022",
+		"target": "es2022",
+		"types": ["vite/client"],
+		"baseUrl": ".",
+		"paths": {
+			"@components/*": [
+				"src/components/*.astro"
+			],
+			"@layouts/*": [
+				"src/components/layouts/*.astro"
+			],
+			"@data/*": [
+				"src/data/*.ts"
+			],
+		},
+	}
+}
