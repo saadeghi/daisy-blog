@@ -3,7 +3,7 @@ import type { Post } from '@data/post';
 const post: Post = Astro.props.post
 ---
 
-<div class="py-6 flex flex-row-reverse gap-10 items-start">
+<div class="py-6 flex flex-row-reverse gap-6 md:gap-10 items-start">
 	{post.img &&
 		<a href={`/${post.slug}`} class="shrink-0">
 			<img src={post.img} alt={post.title} width="160" height="160" class="w-20 h-20 md:w-40 md:h-40 rounded bg-base-200 object-cover" />
